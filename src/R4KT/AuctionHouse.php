@@ -279,7 +279,7 @@ class AuctionHouse extends PluginBase {
                     case 'sell':
                         if (isset($args[1])) {
                             if (($item = $sender->getInventory()->getItemInHand())->getId() !== 0) {
-                                $this->sellAuction(Sender $sender, Item $item, int $args[1]);
+                                $this->sellAuction($sender, $item, $args[1]);
                                 $sender->getInventory()->remove($item);
                                 return true;
                             }
@@ -290,7 +290,7 @@ class AuctionHouse extends PluginBase {
                         break;
                     case 'bid':
                         if (isset($args[1])) {
-                                $this->addBid(int $args[1], Sender $sender);
+                                $this->addBid($args[1], Sender $sender);
                                 return true;
                          } else {
                             $sender->sendMessage(TF::AQUA.'/ah bid '.TF::GRAY.'<auctionID> <amount>'.PHP_EOL.TF::GRAY.'Place a bid in auction for '.TF::YELLOW.'$<amount>');
@@ -298,7 +298,7 @@ class AuctionHouse extends PluginBase {
                         }
                     case 'buy':
                         if (isset($args[1])) {
-                            $this->buyAuction(int $args[1], Sender $sender);
+                            $this->buyAuction($args[1], $sender);
                             return true;
                         } else {
                             $sender->sendMessage(TF::AQUA.'/ah buy '.TF::GRAY.'<auctionID>'.PHP_EOL.TF::GRAY.'Buy the item assigned '.TF::YELLOW.'<auctionID>'.TF::GRAY.' off auction.');
@@ -307,7 +307,7 @@ class AuctionHouse extends PluginBase {
                         break;
                     case 'list':
                         if (!isset($args[1])) {
-                            $this->sendAuctionList(Sender $sender);
+                            $this->sendAuctionList($sender);
                             $sender->sendMessage(self::prefix().TF::GRAY.'Use '.TF::YELLOW.'/ah list <sellername>'.TF::GRAY.' to find item by seller, '.TF::YELLOW.'/ah info <auctionid> '.TF::GRAY.'to get more information about an item.');
                             return true;
                         } else {
