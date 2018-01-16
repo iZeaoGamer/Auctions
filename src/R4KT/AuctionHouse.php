@@ -64,7 +64,7 @@ class AuctionHouse extends PluginBase {
          foreach ($this->auctions as $aucId => $aucData) {
             $data->set($aucId, $aucData);
         }
-        foreach($this->bids as $bidId => $bidData) {
+         foreach($this->bids as $bidId => $bidData) {
             $data2->set($bidId, $bidData);
         }
         $data->save();
@@ -90,7 +90,7 @@ class AuctionHouse extends PluginBase {
     /**
     * Prefix used for AuctionHouse messages.
     */
-    public static function prefix($positive = true): string {
+    public static function prefix($positive = true) : string {
         $colour = $positive ? TF::GREEN : TF::RED;
         return TF::AQUA.TF::BOLD.'AH '.TF::RESET.$colour;
     }
