@@ -227,7 +227,7 @@ class AuctionHouse extends PluginBase {
         }
     }
     
-    public function addBid(Player $player, int $price) {
+    public function addBid($player, $price) {
         $name = strtolower($player->getName());
         $auction = $this->auctions[$aucId];
         $biddata = [
@@ -290,7 +290,7 @@ class AuctionHouse extends PluginBase {
                         break;
                     case 'bid':
                         if (isset($args[1])) {
-                                $this->addBid($args[1], Sender $sender);
+                                $this->addBid($args[1], $sender);
                                 return true;
                          } else {
                             $sender->sendMessage(TF::AQUA.'/ah bid '.TF::GRAY.'<auctionID> <amount>'.PHP_EOL.TF::GRAY.'Place a bid in auction for '.TF::YELLOW.'$<amount>');
