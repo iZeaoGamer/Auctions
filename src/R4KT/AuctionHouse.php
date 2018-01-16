@@ -227,7 +227,7 @@ class AuctionHouse extends PluginBase {
         }
     }
     
-    public function addBid($player, $price) {
+    public function addBid(Player $player, int $price) {
         $name = strtolower($player->getName());
         $auction = $this->auctions[$aucId];
         $biddata = [
