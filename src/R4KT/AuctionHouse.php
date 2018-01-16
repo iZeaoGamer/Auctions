@@ -39,14 +39,14 @@ class AuctionHouse extends PluginBase {
     /**
     * When the plugin is fully loaded.
     */
-    public function onEnable() {
+    public function onEnable(): void {
         $this->loadEverything();
     }
 
     /**
     * When the plugin gets disabled.
     */
-    public function onDisable() {
+    public function onDisable(): void {
         $this->saveEverything();
     }
 
@@ -90,7 +90,7 @@ class AuctionHouse extends PluginBase {
     /**
     * Prefix used for AuctionHouse messages.
     */
-    public static function prefix($positive = true) : string {
+    public static function prefix($positive = true): string {
         $colour = $positive ? TF::GREEN : TF::RED;
         return TF::AQUA.TF::BOLD.'AH '.TF::RESET.$colour;
     }
@@ -138,7 +138,7 @@ class AuctionHouse extends PluginBase {
     * To sell $item on auction as $player for a $price.
     * Item $item, Player $player, int $price.
     */
-    public function sellAuction($player, $item, $price) {
+    public function sellAuction(Player $player, Item $item, int $price) {
         $aucId = Utils::getFreeKey($this->auctions);
         $name = strtolower($player->getName());
         $cloned = Item::get($item->getId(), $item->getDamage());
@@ -164,7 +164,7 @@ class AuctionHouse extends PluginBase {
             'seller' => $name,
             'price' => $price
         ];
-        $this->auctions[$aucId] = $auctiondata;
+        $this->auctions[$aucId] = $aucdata;
         $player->sendMessage(self::prefix().'You have successfully placed your '.$itemname.' (x'.$itemcount.') for $'.$price.' on auction.');
         $player->sendMessage(TF::GRAY.'Your auction ID is '.TF::GREEN.$aucId.TF::GRAY.'.');
         return true;
